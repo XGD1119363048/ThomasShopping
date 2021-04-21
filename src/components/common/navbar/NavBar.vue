@@ -13,7 +13,16 @@
         </div>
       </div>
     </div>
-    <div class="site-header"></div>
+    <div class="site-header">
+      <div class="container">
+        <div class="header-logo">
+          <slot name="header-logo"></slot>
+        </div>
+        <div class="header-search">
+          <slot name="header-search"></slot>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -45,12 +54,6 @@
     line-height: 40px;
   }
 
-  .site-topbar a {
-    color: #b0b0b0;
-    line-height: 40px;
-    display: inline-block;
-  }
-
   .site-topbar .topbar-cart {
     position: relative;
     float: right;
@@ -73,5 +76,21 @@
   .site-header {
     z-index: 20;
     height: 100px;
+  }
+
+  .site-header .container {
+    position: relative;
+  }
+
+  .site-header .header-logo {
+    float: left;
+    width: 62px;
+    margin-top: 22px;
+  }
+
+  .site-header .header-search {
+    float: right;
+    width: 296px;
+    margin-top: 25px;
   }
 </style>

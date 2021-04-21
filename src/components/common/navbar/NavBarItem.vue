@@ -1,5 +1,5 @@
 <template>
-  <div class="nav-bar-item">
+  <div class="nav-bar-item" @click="itemClick">
     <span class="sep"></span>
     <slot name="item-icon"></slot>
     <slot name="item-text"></slot>
@@ -9,23 +9,32 @@
 
 <script>
   export default {
-    name: "NavBarItem"
+    name: "NavBarItem",
+    props: {
+      path: String
+    },
+    methods: {
+      itemClick() {
+        this.$router.replace(this.path)
+      }
+    }
   }
 </script>
 
 <style scoped>
   .nav-bar-item {
     flex: 1;
-    float: left;
     text-align: center;
-    height: 40px;
+    height: 49px;
     font-size: 14px;
   }
 
-  .nav-bar-item text {
-    color: #b0b0b0;
-    line-height: 40px;
-    display: inline-block;
+  .nav-bar-item img {
+    width: 24px;
+    height: 24px;
+    /*margin-top: 3px;*/
+    vertical-align: middle;
+    /*margin-bottom: 2px;*/
   }
 
   .nav-bar-item .sep {
