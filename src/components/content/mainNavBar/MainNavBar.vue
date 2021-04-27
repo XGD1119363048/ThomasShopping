@@ -2,39 +2,41 @@
   <nav-bar>
     <div slot="topbar-nav">
       <nav-bar-item path="/home">
-        <div slot="item-text">TMSshopping</div>
+        <a slot="item-text">TMSshopping</a>
       </nav-bar-item>
       <nav-bar-item>
-        <div slot="item-text">good2</div>
+        <a slot="item-text">good2</a>
       </nav-bar-item>
       <nav-bar-item>
-        <div slot="item-text">good3</div>
+        <a slot="item-text">good3</a>
       </nav-bar-item>
       <nav-bar-item>
-        <div slot="item-text">good4</div>
+        <a slot="item-text">good4</a>
       </nav-bar-item>
       <nav-bar-item>
-        <div slot="item-text">good5</div>
+        <a slot="item-text">good5</a>
       </nav-bar-item>
       <nav-bar-item>
-        <div slot="item-text">good6</div>
+        <a slot="item-text">good6</a>
       </nav-bar-item>
     </div>
     <div slot="topbar-cart">
       <nav-bar-item>
-        <img slot="item-icon" src="~assets/img/navbar/Cart.svg">
-        <div slot="item-text">Cart</div>
+        <a slot="item-text">
+          <a-icon type="shopping-cart" />
+          Cart
+        </a>
       </nav-bar-item>
     </div>
     <div slot="topbar-info">
       <nav-bar-item path="/login">
-        <div slot="item-text">Login</div>
+        <a slot="item-text">Login</a>
       </nav-bar-item>
       <nav-bar-item path="/register">
-        <div slot="item-text">Register</div>
+        <a slot="item-text">Register</a>
       </nav-bar-item>
       <nav-bar-item>
-        <div slot="item-text">Message</div>
+        <a slot="item-text">Message</a>
       </nav-bar-item>
     </div>
     <div slot="header-logo">
@@ -45,8 +47,12 @@
     <div slot="header-search">
       <nav-bar-item2>
         <div slot="item-box">
-          <input placeholder="Basic usage" />
-          <input type="submit"></input>
+          <a-input-search
+              placeholder="input search text"
+              enter-button="Search"
+              size="large"
+              @search="onSearch"
+          />
         </div>
       </nav-bar-item2>
     </div>
@@ -54,18 +60,27 @@
 </template>
 
 <script>
-import NavBar from "components/common/navbar/NavBar";
-import NavBarItem from "components/common/navbar/NavBarItem";
-import NavBarItem2 from "components/common/navbar/NavBarItem2";
+  import NavBar from "components/common/navbar/NavBar";
+  import NavBarItem from "components/common/navbar/NavBarItem";
+  import NavBarItem2 from "components/common/navbar/NavBarItem2";
+  import { Input, Button, Icon } from 'ant-design-vue'
 
-export default {
-  name: "MainNavBar",
-  components: {
-    NavBar,
-    NavBarItem,
-    NavBarItem2
+  export default {
+    name: "MainNavBar",
+    components: {
+      NavBar,
+      NavBarItem,
+      NavBarItem2,
+      'a-input-search': Input.Search,
+      'a-button': Button,
+      'a-icon': Icon
+    },
+    methods: {
+      onSearch(value) {
+        console.log(value);
+      }
+    }
   }
-}
 </script>
 
 <style scoped>

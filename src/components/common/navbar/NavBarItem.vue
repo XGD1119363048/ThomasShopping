@@ -1,7 +1,6 @@
 <template>
   <div class="nav-bar-item" @click="itemClick">
     <span class="sep"></span>
-    <slot name="item-icon"></slot>
     <slot name="item-text"></slot>
     <span class="sep"></span>
   </div>

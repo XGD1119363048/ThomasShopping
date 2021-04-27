@@ -13,14 +13,12 @@ module.exports = {
   css: {
     loaderOptions: {
       less: {
-        options: {
-          modifyVars: {
-            'primary-color': '#1DA57A',
-            'link-color': '#1DA57A',
-            'border-radius-base': '2px'
-          },
-          javascriptEnabled: true
-        }
+        modifyVars: {
+          'btn-primary-bg': '#000000',
+          'checkbox-color': '#333333',
+          'link-color': '#b0b0b0'
+        },
+        javascriptEnabled: 'true'
       }
     }
   }
