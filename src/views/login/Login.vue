@@ -1,6 +1,5 @@
 <template>
   <div id="login">
-    <h2>{{$store.state.username}}</h2>
     <a-form
         id="components-form-demo-normal-login"
         :form="form"
