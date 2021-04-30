@@ -5,6 +5,7 @@ const Cart = () => import('../views/cart/Cart')
 const Home = () => import('../views/home/Home')
 const Login = () => import('../views/login/Login')
 const Register = () => import('../views/register/Register')
+const Good = () => import('../views/good/Good')
 
 Vue.use(VueRouter)
 
@@ -28,6 +29,10 @@ const routes = [
   {
     path: '/register',
     component: Register
+  },
+  {
+    path: '/goodDetail/',
+    component: Good
   }
 ]
 
