@@ -11,4 +11,7 @@ public interface productService {
     Product getProductById(Long id);
     List<Product> getProductByShop(Shop shop);
     Boolean deleteProductById(Long id);
+    List<Product> getProductByCategory(Long categoryId);
+    List<Product> getProductByCategoryChildId(Long categoryChildId);
+    List<Product> getProductByCount(int count);
 }

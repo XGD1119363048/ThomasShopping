@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -39,8 +40,8 @@ public class userController {
     }
 
     @GetMapping("/queryUser")
-    private JSONObject queryUser(@RequestBody JSONObject jsonObject){
-        String userName = jsonObject.getString("userName");
+    private JSONObject queryUser(HttpServletRequest request){
+        String userName = request.getParameter("userName");
         User user = userService.getUser(userName);
         JSONObject res = new JSONObject();
         if(user!=null){

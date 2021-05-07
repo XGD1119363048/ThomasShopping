@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,8 +63,8 @@ public class productController {
     }
 
     @GetMapping("/getProductsByShopName")
-    private JSONObject getProductsByShopName(@RequestBody JSONObject jsonObject){
-        String shopName = jsonObject.getString("shopName");
+    private JSONObject getProductsByShopName(HttpServletRequest request){
+        String shopName = request.getParameter("shopName");
         Shop shop = shopService.getShopByName(shopName);
         JSONObject res = new JSONObject();
         if(shop!=null){
@@ -80,9 +81,45 @@ public class productController {
         return res;
     }
 
+    @GetMapping("/getProductByCategoryId")
+    private JSONObject getProductByCategoryId(HttpServletRequest request){
+        JSONObject res = new JSONObject();
+        Long categoryId = Long.parseLong(request.getParameter("categoryId"));
+        List<Product> products = productService.getProductByCategory(categoryId);
+        if(products!=null){
+            for(Product product:products)
+                product.setShop(null);
+            res.put("product", JSONArray.parseArray(JSON.toJSONString(products)));
+            res.put("error","");
+        }
+        else{
+            res.put("product",null);
+            res.put("error","查询商品失败");
+        }
+        return res;
+    }
+
+    @GetMapping("/getProductByCategoryChildId")
+    private JSONObject getProductByCategoryChildId(HttpServletRequest request){
+        JSONObject res = new JSONObject();
+        Long categoryChildId = Long.parseLong(request.getParameter("categoryChildId"));
+        List<Product> products = productService.getProductByCategoryChildId(categoryChildId);
+        if(products!=null){
+            for(Product product:products)
+                product.setShop(null);
+            res.put("product", JSONArray.parseArray(JSON.toJSONString(products)));
+            res.put("error","");
+        }
+        else{
+            res.put("product",null);
+            res.put("error","查询商品失败");
+        }
+        return res;
+    }
+
     @GetMapping("/getProductById")
-    private JSONObject getProductById(@RequestBody JSONObject jsonObject){
-        Long id = jsonObject.getLong("productId");
+    private JSONObject getProductById(HttpServletRequest request){
+        Long id = Long.parseLong(request.getParameter("productId"));
         JSONObject res = new JSONObject();
         Product product = productService.getProductById(id);
         if(product!=null){
@@ -92,7 +129,6 @@ public class productController {
                 shop.setOrders(null);
                 shop.setUser(null);
             }
-
             res.put("product",JSONObject.parseObject(JSON.toJSONString(product)));
             res.put("error","");
         }
@@ -104,13 +140,31 @@ public class productController {
     }
 
     @GetMapping("/deleteProductById")
-    private JSONObject deleteProductById(@RequestBody JSONObject jsonObject){
-        Long id = jsonObject.getLong("productId");
+    private JSONObject deleteProductById(HttpServletRequest request){
+        Long id = Long.parseLong(request.getParameter("productId"));
         JSONObject res = new JSONObject();
         if(productService.deleteProductById(id))
             res.put("error","");
         else
             res.put("error","删除商品信息失败");
+        return res;
+    }
+
+    @GetMapping("/getProductByCount")
+    private JSONObject getProductByCount(HttpServletRequest request){
+        int count = Integer.parseInt(request.getParameter("count"));
+        JSONObject res = new JSONObject();
+        List<Product> products = productService.getProductByCount(count);
+        if(products!=null){
+            for(Product product:products)
+                product.setShop(null);
+            res.put("product",JSONArray.parseArray(JSON.toJSONString(products)));
+            res.put("error","");
+        }
+        else{
+            res.put("product",null);
+            res.put("error","查询商品失败");
+        }
         return res;
     }
 }

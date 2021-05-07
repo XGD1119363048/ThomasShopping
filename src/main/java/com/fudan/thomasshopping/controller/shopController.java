@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -64,8 +65,8 @@ public class shopController {
     }
 
     @GetMapping("/getShopById")
-    private JSONObject getShopById(@RequestBody JSONObject jsonObject){
-        Long id = jsonObject.getLong("shopId");
+    private JSONObject getShopById(HttpServletRequest request){
+        Long id = Long.parseLong(request.getParameter("shopId"));
         Shop shop = shopService.getShop(id);
         JSONObject res = new JSONObject();
         if(shop!=null){
@@ -125,8 +126,8 @@ public class shopController {
     }
 
     @GetMapping("/getShopByUserName")
-    private JSONObject getShopByUserName(@RequestBody JSONObject jsonObject){
-        String userName = jsonObject.getString("userName");
+    private JSONObject getShopByUserName(HttpServletRequest request){
+        String userName = request.getParameter("userName");
         JSONObject res = new JSONObject();
         User user = userService.getUser(userName);
         if(user!=null){
@@ -156,8 +157,8 @@ public class shopController {
     }
 
     @GetMapping("/getShopByShopName")
-    private JSONObject getShopByShopName(@RequestBody JSONObject jsonObject){
-        String name = jsonObject.getString("shopName");
+    private JSONObject getShopByShopName(HttpServletRequest request){
+        String name = request.getParameter("shopName");
         JSONObject res = new JSONObject();
         Shop shop = shopService.getShopByName(name);
         if(shop!=null){

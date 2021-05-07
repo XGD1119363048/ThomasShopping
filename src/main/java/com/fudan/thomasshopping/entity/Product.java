@@ -15,8 +15,8 @@ public class Product {
     private String description;//商品描述
     private Double price;//商品价格
     private Integer stock;//商品库存
-    private String categoryId;//商品分类id
-    private String categoryChildId;//商品子分类id
+    private Long categoryId;//商品分类id
+    private Long categoryChildId;//商品子分类id
     private String imageAddress;//商品图片地址
     @ManyToOne(fetch = FetchType.LAZY)
     private Shop shop;//商店

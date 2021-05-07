@@ -10,4 +10,8 @@ import java.util.List;
 
 public interface productRepository extends JpaRepository<Product,Long>, JpaSpecificationExecutor<Product> {
     List<Product> findAllByShop(Shop shop);
+
+    List<Product> findAllByCategoryId(Long categoryId);
+
+    List<Product> findAllByCategoryChildId(Long categoryChildId);
 }
