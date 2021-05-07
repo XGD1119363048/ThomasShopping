@@ -9,8 +9,25 @@
 
   export default {
     name: "GoodsList",
-    components: {
+     components: {
       GoodsListItem
+    },
+      data(){
+      var _this =this;
+      var url="";
+      if(_this.goodId==1){
+          url='json/guazi.json';
+        }else if(_this.goodId==2){
+          url='json/latiao.json';
+        }else{
+          url='json/guazi.json';
+        }
+      this.$axios.get(url).then(function(res){
+        _this.goods=res.data;
+      })
+      return{
+        goods:[]
+      }
     },
     props: {
       goods: {
@@ -18,6 +35,25 @@
         default() {
           return []
         }
+      },
+      goodId:Number
+    },
+    watch:{
+      goodId(){
+        var _this =this;
+        var url ="";
+        if(_this.goodId==1){
+          url='json/guazi.json';
+        }else if(_this.goodId==2){
+          url='json/latiao.json';
+        }
+
+        this.$axios.get(url).then(function(res){
+        _this.goods=res.data;
+      })
+      return{
+        goods:[]
+      }
       }
     }
   }

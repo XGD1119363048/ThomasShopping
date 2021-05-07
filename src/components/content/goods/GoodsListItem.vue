@@ -1,7 +1,8 @@
 <template>
   <div class="goods-item" @click="goodClick">
 <!--      <img :src="goodsItem.show.img" alt="">-->
-    <img src="~assets/img/navbar/Cart.svg">
+    <!-- <img src="~assets/img/navbar/Cart.svg"> -->
+     <img v-bind:src="goodsItem.img">
     <div class="goods-info">
       <p>{{goodsItem.title}}</p>
       <span class="price">{{goodsItem.price}}元</span>
