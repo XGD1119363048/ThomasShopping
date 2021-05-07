@@ -28,7 +28,7 @@
         </a>
       </nav-bar-item>
     </div>
-    <div slot="topbar-info">
+    <div v-if="$store.state.isLogin == false" slot="topbar-info">
       <nav-bar-item path="/login">
         <a slot="item-text">Login</a>
       </nav-bar-item>
@@ -37,6 +37,19 @@
       </nav-bar-item>
       <nav-bar-item>
         <a slot="item-text">Message</a>
+      </nav-bar-item>
+    </div>
+    <div v-else slot="topbar-info">
+      <nav-bar-item>
+        <a slot="item-text">
+          <a-icon type="reddit" />
+          {{$store.state.userId}}
+        </a>
+      </nav-bar-item>
+      <nav-bar-item path="/login">
+        <a slot="item-text" @click="logoutClick">
+          Logout
+        </a>
       </nav-bar-item>
     </div>
     <div slot="header-logo">
@@ -78,6 +91,11 @@
     methods: {
       onSearch(value) {
         console.log(value)
+      },
+      logoutClick() {
+        this.$store.state.userId = ''
+        this.$store.state.isLogin = false
+        // this.$router.push('/login')
       }
     }
   }

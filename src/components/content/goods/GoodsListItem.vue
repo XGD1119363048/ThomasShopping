@@ -1,9 +1,9 @@
 <template>
   <div class="goods-item" @click="goodClick">
-<!--      <img :src="goodsItem.show.img" alt="">-->
-    <img src="~assets/img/navbar/Cart.svg">
+      <img :src="goodsItem.imageAddress" alt="">
+<!--    <img src="~assets/img/navbar/Cart.svg">-->
     <div class="goods-info">
-      <p>{{goodsItem.title}}</p>
+      <p>{{goodsItem.name}}</p>
       <span class="price">{{goodsItem.price}}元</span>
     </div>
   </div>
@@ -49,7 +49,7 @@
   .goods-info {
     font-size: 12px;
     position: absolute;
-    bottom: 5px;
+    bottom: 2px;
     left: 0;
     right: 0;
     overflow: hidden;

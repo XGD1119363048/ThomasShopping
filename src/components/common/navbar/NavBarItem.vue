@@ -14,7 +14,10 @@
     },
     methods: {
       itemClick() {
-        this.$router.replace(this.path)
+        if(sessionStorage.getItem('isLogin') == true || this.path == '/register')
+          this.$router.push(this.path)
+        else
+          this.$router.push('/login')
       }
     }
   }

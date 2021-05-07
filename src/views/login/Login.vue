@@ -63,6 +63,8 @@
 
 <script>
   import { Form, Icon, Checkbox, Input, Button } from 'ant-design-vue'
+  import {SETUSERID} from "@/store/mutations-types";
+  import {checkUser} from "network/user";
 
   export default {
     name: "Login",
@@ -88,6 +90,16 @@
         this.form.validateFields((err, values) => {
           if (!err) {
             console.log('Received values of form: ', values)
+            checkUser(values.userName, values.password).then(res => {
+              console.log('success');
+              console.log(res);
+              const payload = {
+                userId: values.userName,
+                isLogin: true
+              }
+              this.$store.commit(SETUSERID, payload)
+              this.$router.push('/home')
+            })
           }
         })
       },

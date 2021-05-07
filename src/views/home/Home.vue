@@ -6,6 +6,7 @@
 
 <script>
   import GoodsList from "components/content/goods/GoodsList";
+  import {getHomeGoods} from "network/good";
 
   export default {
     name: "Home",
@@ -15,8 +16,12 @@
     data() {
       return {
         goods: {
+          'homeGoods': {
+            page: 1,
+            list: []
+          },
           'good1': {
-            page: 0,
+            page: 1,
             list: [
               {
                 show: {img: '/img/navbar/Cart_Active.svg'},
@@ -66,10 +71,34 @@
                 price: 1,
                 id: 101208
               },
+              {
+                show: {img: ''},
+                title: 'title9',
+                price: 1,
+                id: 101209
+              },
+              {
+                show: {img: ''},
+                title: 'title10',
+                price: 1,
+                id: 101210
+              },
+              {
+                show: {img: ''},
+                title: 'title11',
+                price: 1,
+                id: 101211
+              },
+              {
+                show: {img: ''},
+                title: 'title12',
+                price: 1,
+                id: 101212
+              },
             ]
           }
         },
-        currentType: 'good1'
+        currentType: 'homeGoods'
       }
     },
     computed: {
@@ -78,6 +107,15 @@
       }
     },
     created() {
+      this.getHomeGoods(this.goods[this.currentType].page * 64)
+    },
+    methods: {
+      getHomeGoods(count) {
+        getHomeGoods(count).then(res => {
+          this.goods[this.currentType].list = res.product
+          console.log(this.goods[this.currentType].list);
+        })
+      }
     }
   }
 </script>

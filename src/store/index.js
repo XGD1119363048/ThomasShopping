@@ -8,6 +8,9 @@ import getters from './getters'
 Vue.use(Vuex)
 
 const state = {
+  isLogin: false,
+  userId: '',
+  userInfo: {}
 }
 
 const store = new Vuex.Store({
