@@ -21,7 +21,7 @@
       </nav-bar-item>
     </div>
     <div slot="topbar-cart">
-      <nav-bar-item>
+      <nav-bar-item path="/cart">
         <a slot="item-text">
           <a-icon type="shopping-cart" />
           Cart

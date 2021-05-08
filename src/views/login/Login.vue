@@ -91,14 +91,19 @@
           if (!err) {
             console.log('Received values of form: ', values)
             checkUser(values.userName, values.password).then(res => {
-              console.log('success');
-              console.log(res);
-              const payload = {
-                userId: values.userName,
-                isLogin: true
+              if(res.error == "") {
+                const payload = {
+                  userId: values.userName,
+                  isLogin: true
+                }
+                this.$store.commit(SETUSERID, payload)
+                this.$router.push('/home')
+              } else {
+                alert("用户名或密码错误")
+                this.form.setFieldsValue({
+                  password: ''
+                })
               }
-              this.$store.commit(SETUSERID, payload)
-              this.$router.push('/home')
             })
           }
         })

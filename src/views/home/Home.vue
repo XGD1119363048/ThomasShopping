@@ -113,7 +113,7 @@
       getHomeGoods(count) {
         getHomeGoods(count).then(res => {
           this.goods[this.currentType].list = res.product
-          console.log(this.goods[this.currentType].list);
+          // console.log(this.goods[this.currentType].list);
         })
       }
     }

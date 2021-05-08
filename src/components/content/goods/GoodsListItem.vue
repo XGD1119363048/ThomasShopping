@@ -1,10 +1,10 @@
 <template>
   <div class="goods-item" @click="goodClick">
       <img :src="goodsItem.imageAddress" alt="">
-<!--    <img src="~assets/img/navbar/Cart.svg">-->
+<!--    <img src="~assets/img/navbar/cart.svg">-->
     <div class="goods-info">
       <p>{{goodsItem.name}}</p>
-      <span class="price">{{goodsItem.price}}元</span>
+      <span class="price">￥{{goodsItem.price}}</span>
     </div>
   </div>
 </template>
@@ -22,12 +22,16 @@
     },
     methods: {
       goodClick() {
-        this.$router.push({
-          path: '/goodDetail',
-          query: {
-            goodId: this.goodsItem.id
-          }
-        })
+        if (this.$store.state.isLogin == true) {
+          this.$router.push({
+            path: '/goodDetail',
+            query: {
+              goodId: this.goodsItem.id
+            }
+          })
+        } else {
+          this.$router.push('/login')
+        }
       }
     }
   }
@@ -35,6 +39,7 @@
 
 <style scoped>
   .goods-item {
+    padding-top: 40px;
     padding-bottom: 40px;
     position: relative;
     width: 24%;
@@ -47,9 +52,10 @@
   }
 
   .goods-info {
-    font-size: 12px;
+    font-size: 20px;
+    color: black;
     position: absolute;
-    bottom: 2px;
+    bottom: -22px;
     left: 0;
     right: 0;
     overflow: hidden;
@@ -64,7 +70,8 @@
   }
 
   .goods-info .price {
-    color: var(--color-high-text);
+    color: red;
+    /*color: var(--color-high-text);*/
     margin-right: 20px;
   }
 
@@ -79,6 +86,6 @@
   /*  top: -1px;*/
   /*  width: 14px;*/
   /*  height: 14px;*/
-  /*  background: url("~assets/img/navbar/Cart.svg") 0 0/14px 14px;*/
+  /*  background: url("~assets/img/navbar/cart.svg") 0 0/14px 14px;*/
   /*}*/
 </style>

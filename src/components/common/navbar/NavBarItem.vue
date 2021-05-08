@@ -14,10 +14,11 @@
     },
     methods: {
       itemClick() {
-        if(sessionStorage.getItem('isLogin') == true || this.path == '/register')
+        if(this.$store.state.isLogin == true || this.path == '/register' || this.path == '/home') {
           this.$router.push(this.path)
-        else
+        } else {
           this.$router.push('/login')
+        }
       }
     }
   }
