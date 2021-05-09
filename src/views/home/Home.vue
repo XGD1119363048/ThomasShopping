@@ -43,13 +43,11 @@ margin:0;
 
 </style>
 
-<script>
-  
+
+<script>  
   import HomeNavBar from "components/content/mainNavBar/HomeNavBar";
   import HomeLeftNavBar from "components/common/navbar/HomeLeftNavBar";
   import HomeRight from '../../components/HomeRight';
-  
-
 
   export default {
     name: "Home",
@@ -60,11 +58,21 @@ margin:0;
     },
        
     data() {
-        },
+
+     },
     computed: {
      
     },
     created() {
+      this.getHomeGoods(this.goods[this.currentType].page * 64)
+    },
+    methods: {
+      getHomeGoods(count) {
+        getHomeGoods(count).then(res => {
+          this.goods[this.currentType].list = res.product
+          // console.log(this.goods[this.currentType].list);
+        })
+      }
     }
   }
 </script>

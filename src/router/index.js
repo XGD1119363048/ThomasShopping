@@ -15,7 +15,7 @@ const routes = [
     redirect: '/home'
   },
   {
-    path: '/Cart',
+    path: '/cart',
     component: Cart
   },
   {
