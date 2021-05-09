@@ -36,7 +36,7 @@
   .site-topbar {
     position: relative;
     z-index: 30;
-    height: 40px;
+    height: 60px;
     font-size: 12px;
     color: #b0b0b0;
     background: #333;
@@ -75,7 +75,7 @@
 
   .site-header {
     z-index: 20;
-    height: 100px;
+    height: 50px;
   }
 
   .site-header .container {

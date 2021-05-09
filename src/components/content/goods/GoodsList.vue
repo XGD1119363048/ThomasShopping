@@ -65,6 +65,6 @@
     flex-wrap: wrap;
     justify-content: space-around;
     padding: 2px;
-    margin: 2px 200px;
+    margin: 5px 20px; 
   }
 </style>

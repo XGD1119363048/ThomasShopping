@@ -22,14 +22,15 @@ margin:0;
 }
 
 .left{
-  width:100px;
+  width:150px;
   float:left;
   margin-right:10px;
 }
 
 .right{
-  width:1000px;
-  float:right;
+   width:1000px;  
+   background-color: #f5f5f5;
+   float:right;
 }
 
 .main{
@@ -37,8 +38,7 @@ margin:0;
   margin:20px auto;
 }
 .left,.right{
-  background-color: #f5f5f5;
-  height: 500px;
+  height: 1200px;
 }
 
 </style>

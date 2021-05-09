@@ -34,23 +34,23 @@ export function addProduct(shopName, name, description, price, stock, categoryId
 }
 
 /*更新商品*/
-export function addProduct(id, shopName, name, description, price, stock, categoryId, categoryChildId, imageAddress) {
-  return request({
-    url: '/addProduct',
-    method: 'post',
-    data: {
-      id: id,
-      shopName: shopName,
-      name: name,
-      description: description,
-      price: price,
-      stock: stock,
-      categoryId: categoryId,
-      categoryChildId: categoryChildId,
-      imageAddress: imageAddress
-    }
-  })
-}
+// export function addProduct(id, shopName, name, description, price, stock, categoryId, categoryChildId, imageAddress) {
+//   return request({
+//     url: '/addProduct',
+//     method: 'post',
+//     data: {
+//       id: id,
+//       shopName: shopName,
+//       name: name,
+//       description: description,
+//       price: price,
+//       stock: stock,
+//       categoryId: categoryId,
+//       categoryChildId: categoryChildId,
+//       imageAddress: imageAddress
+//     }
+//   })
+// }
 
 export function getProductsByShopName(shopName) {
   return request({

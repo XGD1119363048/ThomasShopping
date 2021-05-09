@@ -5,7 +5,7 @@
         <img slot="item-icon" src="~assets/img/navbar/Cart_Active.svg">
       </nav-bar-item2>
        <nav-bar-item path="/home">
-        <a slot="item-text">TMSshopping</a>
+        <a slot="item-text">TMSShopping</a>
       </nav-bar-item>
      <!-- <nav-bar-item>
         <a slot="item-text">good2</a>
@@ -23,7 +23,7 @@
         <a slot="item-text">good6</a>
       </nav-bar-item> -->
     </div>
-    <div slot="topbar-cart">
+    <div slot="topbar-cart" class="topbar-cart">
       <nav-bar-item>
         <a slot="item-text">
           <a-icon type="shopping-cart" />
@@ -31,7 +31,8 @@
         </a>
       </nav-bar-item>
     </div>
-    <!-- <div slot="header-search"> 
+
+    <div slot="header-search" class="topbar-search"> 
       <nav-bar-item2>
         <div slot="item-box">
           <a-input-search
@@ -42,19 +43,8 @@
           />
         </div>
       </nav-bar-item2>
-</div> -->
-    <div slot="topbar-info">
-      <nav-bar-item2>
-        <div slot="item-box">
-          <a-input-search
-              placeholder="input search text"
-              enter-button="Search"
-              size="large"
-              @search="onSearch"
-          />
-        </div>
-      </nav-bar-item2>
-      
+</div>
+    <div slot="topbar-info" class="topbar-info">
       <nav-bar-item path="/login">
         <a slot="item-text">登录</a>
       </nav-bar-item>
@@ -96,5 +86,10 @@
 <style scoped>
   div {
     display: inline;
+  }
+
+  .topbar-cart,.topbar-search,.topbar-info{
+    height: 60px;
+    background-color: #424242;
   }
 </style>

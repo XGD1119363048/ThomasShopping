@@ -1,13 +1,11 @@
 <template>
   <div class="goods-item" @click="goodClick">
-<<<<<<< HEAD
 <!--      <img :src="goodsItem.show.img" alt="">-->
     <!-- <img src="~assets/img/navbar/Cart.svg"> -->
      <img v-bind:src="goodsItem.img">
-=======
-      <img :src="goodsItem.imageAddress" alt="">
-<!--    <img src="~assets/img/navbar/cart.svg">-->
->>>>>>> d1416d52856f71c4e02d441bacc073ac3588c200
+
+      <!-- <img :src="goodsItem.imageAddress" alt="">
+   <img src="~assets/img/navbar/cart.svg"> -->
     <div class="goods-info">
       <p>{{goodsItem.name}}</p>
       <span class="price">￥{{goodsItem.price}}</span>

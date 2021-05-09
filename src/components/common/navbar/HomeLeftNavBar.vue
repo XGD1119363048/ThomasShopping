@@ -1,5 +1,5 @@
 <template>
-<div>
+<div >
     <div class="title">热门搜索</div>
     <ul class="menu">
         <li @click="menu1">瓜子</li>
@@ -20,22 +20,29 @@
 <style type="text/css" >
 
 .title{
-    width:100px;
-    color:rgb(176,176,176);
+    width:150px;
+    background-color:rgb(176,176,176);
     list-style: none;
-    background-color: rgb(51,51,51);
+    color: rgb(51,51,51);
+    justify-content: center;
+    display:flex;
     
 }
 
 .menu li{
     list-style: none;
     height:50px;
-    background-color:white;
+    background-color: #f5f5f5;
     margin-bottom: 2px;
     line-height: 50px;
     cursor:pointer;
+    justify-content: center;
+    display:flex;
+
+    
 
 }
+
 </style>
 
 <script type="text/javascript">

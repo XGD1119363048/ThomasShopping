@@ -23,6 +23,7 @@ export function replyComment(commentId, reply) {
     })
 }
 
+
 /*获取全部评论*/
 export function getComments() {
     return request({
@@ -39,6 +40,7 @@ export function deleteCommentById(commentId) {
         }
     })
 }
+
 
 /*获取某商品全部评论 */
 export function getComments(productId) {

@@ -36,6 +36,18 @@ export function deleteProductInOrder(orderId, productId, count) {
     })
 }
 
+export function addProductInOrder(orderId, productId, count) {
+    return request({
+        url: '/addProductInOrder',
+        method: 'post',
+        data: {
+            orderId: orderId,
+            productId: productId,
+            count: count
+        }
+    })
+}
+
 export function getOrderByUser(userName) {
     return request({
         url: '/getOrderByUser',
