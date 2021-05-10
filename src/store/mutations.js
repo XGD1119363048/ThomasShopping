@@ -1,8 +1,10 @@
-import {SETUSERID} from "./mutations-types";
+import {SETLOGIN} from "./mutations-types";
 
 export default {
-  [SETUSERID](state, payload) {
+  [SETLOGIN](state, payload) {
     state.userId = payload.userId
     state.isLogin = payload.isLogin
+    window.sessionStorage.setItem('userId', payload.userId)
+    window.sessionStorage.setItem('isLogin', payload.isLogin)
   }
 }

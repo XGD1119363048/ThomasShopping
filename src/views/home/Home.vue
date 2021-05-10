@@ -108,6 +108,7 @@
     },
     created() {
       this.getHomeGoods(this.goods[this.currentType].page * 64)
+      // console.log(window.sessionStorage.getItem('isLogin'));
     },
     methods: {
       getHomeGoods(count) {

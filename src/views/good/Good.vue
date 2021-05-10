@@ -18,12 +18,14 @@
 <!--            <div class="info-item">-->
 <!--              Good Select-->
 <!--            </div>-->
-            <div style="color: red; font-size: 25px">￥{{good.price}}/件</div>
+            <div style="display: inline; color: red; font-size: 25px">￥{{good.price}}/件</div>
+            <div style="display: inline; color: gray; font-size: 15px; margin-left: 300px">库存：{{good.stock}}</div>
+            <br/>
             <a-space size="middle">
               <a-button icon="minus" shape="circle" @click="countMinus" size="large"></a-button>
               <div style="font-size: 22px; color: black">{{count}}</div>
               <a-button icon="plus" shape="circle" @click="countPlus" size="large"></a-button>
-              <a-button type="primary" size="large" style="background-color: #ff0036; border: 2px solid #ff0036">Add To Cart</a-button>
+              <a-button type="primary" size="large" style="background-color: #ff0036; border: 2px solid #ff0036" @click="addProductInOrder">Add To Cart</a-button>
             </a-space>
           </div>
         </div>
@@ -35,7 +37,8 @@
 
 <script>
   import { Layout, Button, Space } from 'ant-design-vue'
-  import { getProductById } from "network/good";
+  import { getProductById } from 'network/good'
+  import { addProductInOrder } from 'network/order'
 
   export default {
     name: "Good",
@@ -66,8 +69,17 @@
       },
       getProductById(id) {
         getProductById(id).then(res => {
-          console.log(res);
+          // console.log(res);
           this.good = res.product
+        })
+      },
+      addProductInOrder() {
+        addProductInOrder(this.$store.state.userId, this.$route.query.goodId, this.count).then(res => {
+          if(res.error == "") {
+            alert('Add to cart successfully!')
+          } else {
+            alert('Error!')
+          }
         })
       }
     },

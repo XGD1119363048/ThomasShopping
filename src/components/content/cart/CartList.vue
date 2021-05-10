@@ -1,6 +1,6 @@
 <template>
   <div id="CartList">
-    <div v-if="goods.length > 0">
+    <div v-if="status == 0 && goods.length > 0">
       <cart-list-item v-for="item in goods"
                       :goods-item="item"
                       :key="item.id"
@@ -30,6 +30,10 @@
         default() {
           return []
         }
+      },
+      status: {
+        type: Number,
+        default: 0
       }
     },
     methods: {

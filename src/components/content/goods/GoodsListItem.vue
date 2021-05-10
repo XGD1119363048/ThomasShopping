@@ -22,16 +22,22 @@
     },
     methods: {
       goodClick() {
-        if (this.$store.state.isLogin == true) {
-          this.$router.push({
-            path: '/goodDetail',
-            query: {
-              goodId: this.goodsItem.id
-            }
-          })
-        } else {
-          this.$router.push('/login')
-        }
+        this.$router.push({
+          path: '/goodDetail',
+          query: {
+            goodId: this.goodsItem.id
+          }
+        })
+        // if (this.$store.state.isLogin == true) {
+        //   this.$router.push({
+        //     path: '/goodDetail',
+        //     query: {
+        //       goodId: this.goodsItem.id
+        //     }
+        //   })
+        // } else {
+        //   this.$router.push('/login')
+        // }
       }
     }
   }

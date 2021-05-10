@@ -1,1 +1,1 @@
-export const SETUSERID = 'setUserId'
+export const SETLOGIN = 'setLogin'

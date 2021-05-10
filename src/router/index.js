@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import store from "@/store";
+import {SETLOGIN} from "@/store/mutations-types";
 
 const Cart = () => import('../views/cart/Cart')
 const Home = () => import('../views/home/Home')
@@ -12,11 +14,14 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '',
-    redirect: '/home'
+    redirect: '/login'
   },
   {
     path: '/cart',
-    component: Cart
+    component: Cart,
+    meta: {
+      requireAuth: true
+    }
   },
   {
     path: '/home',
@@ -32,7 +37,10 @@ const routes = [
   },
   {
     path: '/goodDetail/',
-    component: Good
+    component: Good,
+    meta: {
+      requireAuth: true
+    }
   }
 ]
 
@@ -41,5 +49,21 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
+
+router.beforeEach(((to, from, next) => {
+  // console.log(window.sessionStorage.getItem('isLogin'))
+  // console.log(window.sessionStorage.getItem('userId'))
+  const payload = {
+    userId: window.sessionStorage.getItem('userId'),
+    isLogin: window.sessionStorage.getItem('isLogin')
+  }
+  store.commit(SETLOGIN, payload)
+  if(to.meta.requireAuth && !window.sessionStorage.getItem('isLogin')) {
+    // console.log('test')
+    router.push('/login')
+  } else {
+    next()
+  }
+}))
 
 export default router

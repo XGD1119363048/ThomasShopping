@@ -14,11 +14,12 @@
     },
     methods: {
       itemClick() {
-        if(this.$store.state.isLogin == true || this.path == '/register' || this.path == '/home') {
-          this.$router.push(this.path)
-        } else {
-          this.$router.push('/login')
-        }
+        this.$router.push(this.path)
+        // if(this.$store.state.isLogin == true || this.path == '/register' || this.path == '/home') {
+        //   this.$router.push(this.path)
+        // } else {
+        //   this.$router.push('/login')
+        // }
       }
     }
   }

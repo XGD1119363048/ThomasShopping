@@ -5,19 +5,22 @@
         <a slot="item-text">TMSshopping</a>
       </nav-bar-item>
       <nav-bar-item>
-        <a slot="item-text">good2</a>
+        <a slot="item-text">辣条</a>
       </nav-bar-item>
       <nav-bar-item>
-        <a slot="item-text">good3</a>
+        <a slot="item-text">方便面</a>
       </nav-bar-item>
       <nav-bar-item>
-        <a slot="item-text">good4</a>
+        <a slot="item-text">坚果</a>
       </nav-bar-item>
       <nav-bar-item>
-        <a slot="item-text">good5</a>
+        <a slot="item-text">饮料</a>
       </nav-bar-item>
       <nav-bar-item>
-        <a slot="item-text">good6</a>
+        <a slot="item-text">面包</a>
+      </nav-bar-item>
+      <nav-bar-item>
+        <a slot="item-text">螺蛳粉</a>
       </nav-bar-item>
     </div>
     <div slot="topbar-cart">
@@ -28,7 +31,7 @@
         </a>
       </nav-bar-item>
     </div>
-    <div v-if="$store.state.isLogin == false" slot="topbar-info">
+    <div v-if="this.$store.state.isLogin == false" slot="topbar-info">
       <nav-bar-item path="/login">
         <a slot="item-text">Login</a>
       </nav-bar-item>
@@ -93,10 +96,15 @@
         console.log(value)
       },
       logoutClick() {
-        this.$store.state.userId = ''
-        this.$store.state.isLogin = false
+        // this.$store.state.userId = ''
+        // this.$store.state.isLogin = false
+        window.sessionStorage.setItem('userId', '')
+        window.sessionStorage.setItem('isLogin', false)
         // this.$router.push('/login')
       }
+    },
+    mounted() {
+      // console.log(this.$store.state.isLogin);
     }
   }
 </script>

@@ -63,7 +63,7 @@
 
 <script>
   import { Form, Icon, Checkbox, Input, Button } from 'ant-design-vue'
-  import {SETUSERID} from "@/store/mutations-types";
+  import { SETLOGIN } from "@/store/mutations-types";
   import {checkUser} from "network/user";
 
   export default {
@@ -96,7 +96,7 @@
                   userId: values.userName,
                   isLogin: true
                 }
-                this.$store.commit(SETUSERID, payload)
+                this.$store.commit(SETLOGIN, payload)
                 this.$router.push('/home')
               } else {
                 alert("用户名或密码错误")
@@ -111,6 +111,14 @@
       registerClick() {
         this.$router.replace('/register')
       }
+    },
+    mounted() {
+      const payload = {
+        userId: '',
+        isLogin: false
+      }
+      this.$store.commit(SETLOGIN, payload)
+      // console.log(this.$store.state.isLogin);
     }
   }
 </script>
