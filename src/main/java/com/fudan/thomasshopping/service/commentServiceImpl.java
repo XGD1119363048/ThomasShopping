@@ -2,6 +2,7 @@ package com.fudan.thomasshopping.service;
 
 import com.fudan.thomasshopping.dao.commentRepository;
 import com.fudan.thomasshopping.entity.Comment;
+import com.fudan.thomasshopping.entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +11,9 @@ import java.util.List;
 public class commentServiceImpl implements commentService{
     @Autowired
     private commentRepository commentRepository;
+
+    @Autowired
+    private productService productService;
 
     @Override
     public Comment addComment(Comment comment) {
@@ -45,5 +49,10 @@ public class commentServiceImpl implements commentService{
         if(commentRepository.existsById(id))
             return commentRepository.getOne(id);
         return null;
+    }
+
+    @Override
+    public List<Comment> getCommentByProduct(Product product) {
+        return product.getComments();
     }
 }

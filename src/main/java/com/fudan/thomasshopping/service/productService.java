@@ -1,5 +1,6 @@
 package com.fudan.thomasshopping.service;
 
+import com.fudan.thomasshopping.entity.Order;
 import com.fudan.thomasshopping.entity.Product;
 import com.fudan.thomasshopping.entity.Shop;
 

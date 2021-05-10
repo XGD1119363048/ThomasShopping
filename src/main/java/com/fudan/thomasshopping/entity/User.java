@@ -28,4 +28,5 @@ public class User {
     private Integer coin;//用户积分
     @OneToMany(mappedBy = "user")
     private List<Order> orders;//订单
+    private Double balance;//余额
 }

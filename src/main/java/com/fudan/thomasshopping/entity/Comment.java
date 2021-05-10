@@ -3,10 +3,7 @@ package com.fudan.thomasshopping.entity;
 import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 @Data
@@ -23,4 +20,6 @@ public class Comment {
     @JSONField(format = "yyyy-MM-dd HH:mm:ss")
     private Date reply_time;//回复时间
     private String nickname;//评论昵称
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Product product;
 }

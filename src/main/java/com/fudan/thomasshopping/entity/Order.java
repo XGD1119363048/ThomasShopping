@@ -23,7 +23,7 @@ public class Order {
     private Double pay;//实付金额
     private Integer status;//订单状态
     private String type;//订单类型
-    @OneToMany
+    @ManyToMany(cascade = {CascadeType.PERSIST})
     private List<Product> products;//商品
     @ElementCollection
     private List<Integer> quantity;//商品数量

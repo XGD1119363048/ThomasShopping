@@ -4,12 +4,15 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.fudan.thomasshopping.entity.Order;
 import com.fudan.thomasshopping.entity.User;
+import com.fudan.thomasshopping.service.dataService;
 import com.fudan.thomasshopping.service.userService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -17,10 +20,17 @@ public class userController {
     @Autowired
     private userService userService;
 
+    @Autowired
+    private dataService dataService;
+
     @PostMapping("/addUser")
     private JSONObject addUser(@RequestBody JSONObject jsonObject) {
-        User user = JSON.toJavaObject(jsonObject,User.class);
         JSONObject res = new JSONObject();
+        if(!dataService.checkParams(jsonObject, Arrays.asList("userName","password"))){
+            res.put("error","存在参数为空");
+            return res;
+        }
+        User user = JSON.toJavaObject(jsonObject,User.class);
         if(userService.addUser(user)!=null)
             res.put("error","");
         else
@@ -30,8 +40,13 @@ public class userController {
 
     @PostMapping("/updateUser")
     private JSONObject updateUser(@RequestBody JSONObject jsonObject) {
-        User user = JSON.toJavaObject(jsonObject,User.class);
         JSONObject res = new JSONObject();
+        if(!dataService.checkParams(jsonObject, Collections.singletonList("userName"))){
+            res.put("error","存在参数为空");
+            return res;
+        }
+        User user = JSON.toJavaObject(jsonObject,User.class);
+
         if(userService.updateUser(user)!=null)
             res.put("error","");
         else
@@ -41,9 +56,14 @@ public class userController {
 
     @GetMapping("/queryUser")
     private JSONObject queryUser(HttpServletRequest request){
+        JSONObject res = new JSONObject();
+        if(!dataService.checkParams2(request,Collections.singletonList("userName"))){
+            res.put("user",null);
+            res.put("error","存在参数为空");
+            return res;
+        }
         String userName = request.getParameter("userName");
         User user = userService.getUser(userName);
-        JSONObject res = new JSONObject();
         if(user!=null){
             user.setOrders(null);
             res.put("user",JSONObject.parseObject(JSON.toJSONString(user)));
@@ -56,14 +76,41 @@ public class userController {
     }
 
     @PostMapping("/checkUser")
-    private JSONObject login(@RequestBody JSONObject jsonObject) {
+    private JSONObject checkUser(@RequestBody JSONObject jsonObject) {
+        JSONObject res = new JSONObject();
+        if(!dataService.checkParams(jsonObject,Arrays.asList("userName","password"))){
+            res.put("error","存在参数为空");
+            return res;
+        }
         String userName = jsonObject.getString("userName");
         String password = jsonObject.getString("password");
-        JSONObject res = new JSONObject();
+
         if(userService.checkUser(userName,password))
             res.put("error","");
         else
             res.put("error","登录失败，账号或密码错误");
+        return res;
+    }
+
+    @PostMapping("/addBalance")
+    private JSONObject addBalance(@RequestBody JSONObject jsonObject){
+        JSONObject res = new JSONObject();
+        if(!dataService.checkParams(jsonObject,Arrays.asList("userName","balance"))){
+            res.put("error","存在参数为空");
+            return res;
+        }
+        String userName = jsonObject.getString("userName");
+        Long balance = jsonObject.getLong("balance");
+        User user = userService.getUser(userName);
+        if(user!=null){
+            user.setBalance(user.getBalance()+balance);
+            if(userService.updateUser(user)!=null){
+                res.put("error","");
+                return res;
+            }
+
+        }
+        res.put("error","充值失败");
         return res;
     }
 }

@@ -1,6 +1,7 @@
 package com.fudan.thomasshopping.service;
 
 import com.fudan.thomasshopping.dao.productRepository;
+import com.fudan.thomasshopping.entity.Order;
 import com.fudan.thomasshopping.entity.Product;
 import com.fudan.thomasshopping.entity.Shop;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,7 @@ public class productServiceImpl implements productService{
     public List<Product> getProductByShop(Shop shop) {
         return productRepository.findAllByShop(shop);
     }
+
 
     @Override
     public Boolean deleteProductById(Long id) {
