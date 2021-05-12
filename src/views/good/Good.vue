@@ -30,15 +30,34 @@
           </div>
         </div>
       </a-layout-content>
-      <a-layout-footer></a-layout-footer>
+      <a-layout-footer>
+        <div class="footer">
+          <p>
+            Comments
+            <a-button type="primary" style="float: right" @click="addComment">Send</a-button>
+          </p>
+          <a-textarea placeholder="有什么想法说出来吧！" :rows="4" style="resize: none" v-model="inputMessage"></a-textarea>
+          <br/>
+          <br/>
+          <a-row v-for="item in comments" :key="item.id" class="comments">
+            <a-col :span="6">
+              <a-icon type="reddit" />
+              {{item.nickname}}
+            </a-col>
+            <a-col :span="10" style="text-align: left">{{item.content}}</a-col>
+            <a-col :span="8">test3</a-col>
+          </a-row>
+        </div>
+      </a-layout-footer>
     </a-layout>
   </div>
 </template>
 
 <script>
-  import { Layout, Button, Space } from 'ant-design-vue'
+  import { Layout, Button, Space, Input, Row, Col, Icon } from 'ant-design-vue'
   import { getProductById } from 'network/good'
   import { addProductInOrder } from 'network/order'
+  import { getCommentsByProduct, addComment } from "network/comments";
 
   export default {
     name: "Good",
@@ -48,12 +67,18 @@
       'a-layout-content': Layout.Content,
       'a-layout-footer': Layout.Footer,
       'a-button': Button,
-      'a-space': Space
+      'a-space': Space,
+      'a-textarea': Input.TextArea,
+      'a-row': Row,
+      'a-col': Col,
+      'a-icon': Icon
     },
     data() {
       return {
         good: {},
-        count: 1
+        count: 1,
+        comments: [],
+        inputMessage: ''
       }
     },
     methods: {
@@ -81,10 +106,33 @@
             alert('Error!')
           }
         })
+      },
+      getCommentsByProduct(productId) {
+        // console.log(productId);
+        getCommentsByProduct(productId).then(res => {
+          console.log(res);
+          this.comments = res.comments
+        })
+      },
+      addComment() {
+        addComment(this.inputMessage, this.$store.state.userId, this.$route.query.goodId).then(res => {
+          if(res.error == '') {
+            // console.log(res);
+            const obj = {
+              content: this.inputMessage,
+              nickname: this.$store.state.userId
+            }
+            this.comments.push(obj)
+            this.inputMessage = ''
+          } else {
+            alert('Error')
+          }
+        })
       }
     },
     mounted() {
       this.getProductById(this.$route.query.goodId)
+      this.getCommentsByProduct(this.$route.query.goodId)
     }
   }
 </script>
@@ -140,5 +188,27 @@
 
   .good-info .info-item {
     display: block;
+  }
+
+  .footer {
+    width: 40%;
+    margin: 0 auto;
+  }
+
+  .footer p {
+    text-align: left;
+    margin-left: 10px;
+    color: black;
+    /*text-decoration: underline;*/
+    /*text-decoration: none;*/
+    /*padding-bottom: 5px;*/
+    /*border-bottom: 1px solid #000;*/
+  }
+
+  .comments {
+    border: 1px solid gray;
+    height: 60px;
+    line-height: 60px;
+    color: black;
   }
 </style>

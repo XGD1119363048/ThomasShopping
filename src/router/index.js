@@ -9,6 +9,11 @@ const Login = () => import('../views/login/Login')
 const Register = () => import('../views/register/Register')
 const Good = () => import('../views/good/Good')
 
+const originalPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -36,7 +41,7 @@ const routes = [
     component: Register
   },
   {
-    path: '/goodDetail/',
+    path: '/goodDetail',
     component: Good,
     meta: {
       requireAuth: true

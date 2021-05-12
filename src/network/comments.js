@@ -24,14 +24,6 @@ export function replyComment(commentId, reply) {
 }
 
 
-/*获取全部评论*/
-export function getComments() {
-    return request({
-        url: '/getComments'
-    })
-}
-
-
 export function deleteCommentById(commentId) {
     return request({
         url: '/deleteCommentById',
@@ -42,10 +34,19 @@ export function deleteCommentById(commentId) {
 }
 
 
-/*获取某商品全部评论 */
-export function getComments(productId) {
+
+/*获取全部评论*/
+export function getComments() {
     return request({
-        url: '/getComments',
+        url: '/getComments'
+    })
+}
+
+
+/*获取某商品全部评论 */
+export function getCommentsByProduct(productId) {
+    return request({
+        url: '/getCommentsByProduct',
         params: {
             productId: productId
         }

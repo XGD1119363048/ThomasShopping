@@ -4,22 +4,22 @@
       <nav-bar-item path="/home">
         <a slot="item-text">TMSshopping</a>
       </nav-bar-item>
-      <nav-bar-item>
+      <nav-bar-item path='1'>
         <a slot="item-text">辣条</a>
       </nav-bar-item>
-      <nav-bar-item>
+      <nav-bar-item path="2">
         <a slot="item-text">方便面</a>
       </nav-bar-item>
-      <nav-bar-item>
+      <nav-bar-item path="3">
         <a slot="item-text">坚果</a>
       </nav-bar-item>
-      <nav-bar-item>
+      <nav-bar-item path="4">
         <a slot="item-text">饮料</a>
       </nav-bar-item>
-      <nav-bar-item>
+      <nav-bar-item path="5">
         <a slot="item-text">面包</a>
       </nav-bar-item>
-      <nav-bar-item>
+      <nav-bar-item path="6">
         <a slot="item-text">螺蛳粉</a>
       </nav-bar-item>
     </div>
@@ -43,7 +43,7 @@
       </nav-bar-item>
     </div>
     <div v-else slot="topbar-info">
-      <nav-bar-item>
+      <nav-bar-item path="/info">
         <a slot="item-text">
           <a-icon type="reddit" />
           {{$store.state.userId}}
