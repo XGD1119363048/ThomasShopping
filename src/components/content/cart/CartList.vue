@@ -1,6 +1,10 @@
 <template>
   <div id="CartList">
+<<<<<<< HEAD
     <div v-if="goods.length > 0">
+=======
+    <div v-if="status == 0 && goods.length > 0">
+>>>>>>> 7905b19445d052cbba97498d8991c4d5c81af553
       <cart-list-item v-for="item in goods"
                       :goods-item="item"
                       :key="item.id"
@@ -30,6 +34,13 @@
         default() {
           return []
         }
+<<<<<<< HEAD
+=======
+      },
+      status: {
+        type: Number,
+        default: 0
+>>>>>>> 7905b19445d052cbba97498d8991c4d5c81af553
       }
     },
     methods: {

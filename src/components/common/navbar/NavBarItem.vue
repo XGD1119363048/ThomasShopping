@@ -14,10 +14,22 @@
     },
     methods: {
       itemClick() {
+<<<<<<< HEAD
         if(this.$store.state.isLogin == true || this.path == '/register' || this.path == '/home') {
           this.$router.push(this.path)
         } else {
           this.$router.push('/login')
+=======
+        if(this.path != '/home' && this.path != '/cart' && this.path != '/login' && this.path != '/register' && this.path != '/info') {
+          this.$router.push({
+            path: '/home',
+            query: {
+              categoryId: this.path
+            }
+          })
+        } else {
+          this.$router.push(this.path)
+>>>>>>> 7905b19445d052cbba97498d8991c4d5c81af553
         }
       }
     }

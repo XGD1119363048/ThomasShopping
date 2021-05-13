@@ -4,20 +4,23 @@
       <nav-bar-item path="/home">
         <a slot="item-text">TMSshopping</a>
       </nav-bar-item>
-      <nav-bar-item>
-        <a slot="item-text">good2</a>
+      <nav-bar-item path='1'>
+        <a slot="item-text">辣条</a>
       </nav-bar-item>
-      <nav-bar-item>
-        <a slot="item-text">good3</a>
+      <nav-bar-item path="2">
+        <a slot="item-text">方便面</a>
       </nav-bar-item>
-      <nav-bar-item>
-        <a slot="item-text">good4</a>
+      <nav-bar-item path="3">
+        <a slot="item-text">坚果</a>
       </nav-bar-item>
-      <nav-bar-item>
-        <a slot="item-text">good5</a>
+      <nav-bar-item path="4">
+        <a slot="item-text">饮料</a>
       </nav-bar-item>
-      <nav-bar-item>
-        <a slot="item-text">good6</a>
+      <nav-bar-item path="5">
+        <a slot="item-text">面包</a>
+      </nav-bar-item>
+      <nav-bar-item path="6">
+        <a slot="item-text">螺蛳粉</a>
       </nav-bar-item>
     </div>
     <div slot="topbar-cart">
@@ -28,7 +31,11 @@
         </a>
       </nav-bar-item>
     </div>
+<<<<<<< HEAD
     <div v-if="$store.state.isLogin == false" slot="topbar-info">
+=======
+    <div v-if="this.$store.state.isLogin == false" slot="topbar-info">
+>>>>>>> 7905b19445d052cbba97498d8991c4d5c81af553
       <nav-bar-item path="/login">
         <a slot="item-text">Login</a>
       </nav-bar-item>
@@ -40,7 +47,11 @@
       </nav-bar-item>
     </div>
     <div v-else slot="topbar-info">
+<<<<<<< HEAD
       <nav-bar-item>
+=======
+      <nav-bar-item path="/info">
+>>>>>>> 7905b19445d052cbba97498d8991c4d5c81af553
         <a slot="item-text">
           <a-icon type="reddit" />
           {{$store.state.userId}}
@@ -93,10 +104,20 @@
         console.log(value)
       },
       logoutClick() {
+<<<<<<< HEAD
         this.$store.state.userId = ''
         this.$store.state.isLogin = false
+=======
+        // this.$store.state.userId = ''
+        // this.$store.state.isLogin = false
+        window.sessionStorage.setItem('userId', '')
+        window.sessionStorage.setItem('isLogin', false)
+>>>>>>> 7905b19445d052cbba97498d8991c4d5c81af553
         // this.$router.push('/login')
       }
+    },
+    mounted() {
+      // console.log(this.$store.state.isLogin);
     }
   }
 </script>

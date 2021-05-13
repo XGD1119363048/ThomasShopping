@@ -1,11 +1,16 @@
 <template>
   <div class="goods-item" @click="goodClick">
+<<<<<<< HEAD
 <!--      <img :src="goodsItem.show.img" alt="">-->
     <!-- <img src="~assets/img/navbar/Cart.svg"> -->
      <img v-bind:src="goodsItem.img">
 
       <!-- <img :src="goodsItem.imageAddress" alt="">
    <img src="~assets/img/navbar/cart.svg"> -->
+=======
+      <img :src="goodsItem.imageAddress" alt="">
+<!--    <img src="~assets/img/navbar/cart.svg">-->
+>>>>>>> 7905b19445d052cbba97498d8991c4d5c81af553
     <div class="goods-info">
       <p>{{goodsItem.name}}</p>
       <span class="price">￥{{goodsItem.price}}</span>
@@ -26,6 +31,7 @@
     },
     methods: {
       goodClick() {
+<<<<<<< HEAD
         if (this.$store.state.isLogin == true) {
           this.$router.push({
             path: '/goodDetail',
@@ -36,6 +42,24 @@
         } else {
           this.$router.push('/login')
         }
+=======
+        this.$router.push({
+          path: '/goodDetail',
+          query: {
+            goodId: this.goodsItem.id
+          }
+        })
+        // if (this.$store.state.isLogin == true) {
+        //   this.$router.push({
+        //     path: '/goodDetail',
+        //     query: {
+        //       goodId: this.goodsItem.id
+        //     }
+        //   })
+        // } else {
+        //   this.$router.push('/login')
+        // }
+>>>>>>> 7905b19445d052cbba97498d8991c4d5c81af553
       }
     }
   }

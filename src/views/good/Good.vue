@@ -18,24 +18,63 @@
 <!--            <div class="info-item">-->
 <!--              Good Select-->
 <!--            </div>-->
+<<<<<<< HEAD
             <div style="color: red; font-size: 25px">￥{{good.price}}/件</div>
+=======
+            <div style="display: inline; color: red; font-size: 25px">￥{{good.price}}/件</div>
+            <div style="display: inline; color: gray; font-size: 15px; margin-left: 300px">库存：{{good.stock}}</div>
+            <br/>
+>>>>>>> 7905b19445d052cbba97498d8991c4d5c81af553
             <a-space size="middle">
               <a-button icon="minus" shape="circle" @click="countMinus" size="large"></a-button>
               <div style="font-size: 22px; color: black">{{count}}</div>
               <a-button icon="plus" shape="circle" @click="countPlus" size="large"></a-button>
+<<<<<<< HEAD
               <a-button type="primary" size="large" style="background-color: #ff0036; border: 2px solid #ff0036">Add To Cart</a-button>
+=======
+              <a-button type="primary" size="large" style="background-color: #ff0036; border: 2px solid #ff0036" @click="addProductInOrder">Add To Cart</a-button>
+>>>>>>> 7905b19445d052cbba97498d8991c4d5c81af553
             </a-space>
           </div>
         </div>
       </a-layout-content>
+<<<<<<< HEAD
       <a-layout-footer></a-layout-footer>
+=======
+      <a-layout-footer>
+        <div class="footer">
+          <p>
+            Comments
+            <a-button type="primary" style="float: right" @click="addComment">Send</a-button>
+          </p>
+          <a-textarea placeholder="有什么想法说出来吧！" :rows="4" style="resize: none" v-model="inputMessage"></a-textarea>
+          <br/>
+          <br/>
+          <a-row v-for="item in comments" :key="item.id" class="comments">
+            <a-col :span="6">
+              <a-icon type="reddit" />
+              {{item.nickname}}
+            </a-col>
+            <a-col :span="10" style="text-align: left">{{item.content}}</a-col>
+            <a-col :span="8">test3</a-col>
+          </a-row>
+        </div>
+      </a-layout-footer>
+>>>>>>> 7905b19445d052cbba97498d8991c4d5c81af553
     </a-layout>
   </div>
 </template>
 
 <script>
+<<<<<<< HEAD
   import { Layout, Button, Space } from 'ant-design-vue'
   import { getProductById } from "network/good";
+=======
+  import { Layout, Button, Space, Input, Row, Col, Icon } from 'ant-design-vue'
+  import { getProductById } from 'network/good'
+  import { addProductInOrder } from 'network/order'
+  import { getCommentsByProduct, addComment } from "network/comments";
+>>>>>>> 7905b19445d052cbba97498d8991c4d5c81af553
 
   export default {
     name: "Good",
@@ -45,12 +84,26 @@
       'a-layout-content': Layout.Content,
       'a-layout-footer': Layout.Footer,
       'a-button': Button,
+<<<<<<< HEAD
       'a-space': Space
+=======
+      'a-space': Space,
+      'a-textarea': Input.TextArea,
+      'a-row': Row,
+      'a-col': Col,
+      'a-icon': Icon
+>>>>>>> 7905b19445d052cbba97498d8991c4d5c81af553
     },
     data() {
       return {
         good: {},
+<<<<<<< HEAD
         count: 1
+=======
+        count: 1,
+        comments: [],
+        inputMessage: ''
+>>>>>>> 7905b19445d052cbba97498d8991c4d5c81af553
       }
     },
     methods: {
@@ -66,13 +119,54 @@
       },
       getProductById(id) {
         getProductById(id).then(res => {
+<<<<<<< HEAD
           console.log(res);
           this.good = res.product
         })
+=======
+          // console.log(res);
+          this.good = res.product
+        })
+      },
+      addProductInOrder() {
+        addProductInOrder(this.$store.state.userId, this.$route.query.goodId, this.count).then(res => {
+          if(res.error == "") {
+            alert('Add to cart successfully!')
+          } else {
+            alert('Error!')
+          }
+        })
+      },
+      getCommentsByProduct(productId) {
+        // console.log(productId);
+        getCommentsByProduct(productId).then(res => {
+          console.log(res);
+          this.comments = res.comments
+        })
+      },
+      addComment() {
+        addComment(this.inputMessage, this.$store.state.userId, this.$route.query.goodId).then(res => {
+          if(res.error == '') {
+            // console.log(res);
+            const obj = {
+              content: this.inputMessage,
+              nickname: this.$store.state.userId
+            }
+            this.comments.push(obj)
+            this.inputMessage = ''
+          } else {
+            alert('Error')
+          }
+        })
+>>>>>>> 7905b19445d052cbba97498d8991c4d5c81af553
       }
     },
     mounted() {
       this.getProductById(this.$route.query.goodId)
+<<<<<<< HEAD
+=======
+      this.getCommentsByProduct(this.$route.query.goodId)
+>>>>>>> 7905b19445d052cbba97498d8991c4d5c81af553
     }
   }
 </script>
@@ -129,4 +223,29 @@
   .good-info .info-item {
     display: block;
   }
+<<<<<<< HEAD
+=======
+
+  .footer {
+    width: 40%;
+    margin: 0 auto;
+  }
+
+  .footer p {
+    text-align: left;
+    margin-left: 10px;
+    color: black;
+    /*text-decoration: underline;*/
+    /*text-decoration: none;*/
+    /*padding-bottom: 5px;*/
+    /*border-bottom: 1px solid #000;*/
+  }
+
+  .comments {
+    border: 1px solid gray;
+    height: 60px;
+    line-height: 60px;
+    color: black;
+  }
+>>>>>>> 7905b19445d052cbba97498d8991c4d5c81af553
 </style>
