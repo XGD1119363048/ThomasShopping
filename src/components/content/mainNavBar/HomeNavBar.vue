@@ -90,6 +90,6 @@
 
   .topbar-cart,.topbar-search,.topbar-info{
     height: 60px;
-    background-color: #424242;
+    background-color: ;
   }
 </style>

@@ -61,8 +61,10 @@ margin:0;
 
      },
     computed: {
+
      
     },
+
     created() {
       this.getHomeGoods(this.goods[this.currentType].page * 64)
     },
