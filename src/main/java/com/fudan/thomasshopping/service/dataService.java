@@ -14,4 +14,5 @@ public interface dataService {
     Product simplifyProduct(Product product);
     Shop simplifyShop(Shop shop);
     User simplifyUser(User user);
+    Logistic simplifyLogistic(Logistic logistic);
 }

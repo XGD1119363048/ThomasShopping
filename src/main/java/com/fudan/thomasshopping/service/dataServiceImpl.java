@@ -35,11 +35,13 @@ public class dataServiceImpl implements dataService{
         product.setCategoryChildId(null);
         product.setCategoryId(null);
         product.setImageAddress(null);
+        product.setOrders(null);
         return comment;
     }
 
     @Override
     public Order simplifyOrder(Order order) {
+        order.setLogistic(null);
         User user = order.getUser();
         user.setCoin(null);
         user.setGender(null);
@@ -102,5 +104,11 @@ public class dataServiceImpl implements dataService{
     public User simplifyUser(User user) {
         user.setOrders(null);
         return user;
+    }
+
+    @Override
+    public Logistic simplifyLogistic(Logistic logistic) {
+        logistic.setOrder(null);
+        return logistic;
     }
 }

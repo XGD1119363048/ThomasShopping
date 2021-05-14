@@ -29,5 +29,7 @@ public class Order {
     private List<Integer> quantity;//商品数量
     @ManyToMany(cascade = {CascadeType.PERSIST})
     private List<Shop>shops;//商店
-
+    @OneToOne
+    private Logistic logistic;
 }
+

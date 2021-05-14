@@ -1,5 +1,6 @@
 D:\IdeaProjects\thomasshopping\src\main\java\com\fudan\thomasshopping\service\commentServiceImpl.java
 D:\IdeaProjects\thomasshopping\src\main\java\com\fudan\thomasshopping\dao\shopRepository.java
+D:\IdeaProjects\thomasshopping\src\main\java\com\fudan\thomasshopping\service\logisticServiceImpl.java
 D:\IdeaProjects\thomasshopping\src\main\java\com\fudan\thomasshopping\service\shopService.java
 D:\IdeaProjects\thomasshopping\src\main\java\com\fudan\thomasshopping\entity\Product.java
 D:\IdeaProjects\thomasshopping\src\main\java\com\fudan\thomasshopping\entity\User.java
@@ -8,6 +9,7 @@ D:\IdeaProjects\thomasshopping\src\main\java\com\fudan\thomasshopping\Thomasshop
 D:\IdeaProjects\thomasshopping\src\main\java\com\fudan\thomasshopping\controller\commentController.java
 D:\IdeaProjects\thomasshopping\src\main\java\com\fudan\thomasshopping\service\productService.java
 D:\IdeaProjects\thomasshopping\src\main\java\com\fudan\thomasshopping\dao\productRepository.java
+D:\IdeaProjects\thomasshopping\src\main\java\com\fudan\thomasshopping\entity\Logistic.java
 D:\IdeaProjects\thomasshopping\src\main\java\com\fudan\thomasshopping\entity\Shop.java
 D:\IdeaProjects\thomasshopping\src\main\java\com\fudan\thomasshopping\dao\commentRepository.java
 D:\IdeaProjects\thomasshopping\src\main\java\com\fudan\thomasshopping\service\dataService.java
@@ -17,12 +19,15 @@ D:\IdeaProjects\thomasshopping\src\main\java\com\fudan\thomasshopping\controller
 D:\IdeaProjects\thomasshopping\src\main\java\com\fudan\thomasshopping\controller\shopController.java
 D:\IdeaProjects\thomasshopping\src\main\java\com\fudan\thomasshopping\service\orderServiceImpl.java
 D:\IdeaProjects\thomasshopping\src\main\java\com\fudan\thomasshopping\controller\productController.java
+D:\IdeaProjects\thomasshopping\src\main\java\com\fudan\thomasshopping\dao\logisticRepository.java
 D:\IdeaProjects\thomasshopping\src\main\java\com\fudan\thomasshopping\service\commentService.java
 D:\IdeaProjects\thomasshopping\src\main\java\com\fudan\thomasshopping\service\orderService.java
+D:\IdeaProjects\thomasshopping\src\main\java\com\fudan\thomasshopping\service\logisticService.java
 D:\IdeaProjects\thomasshopping\src\main\java\com\fudan\thomasshopping\entity\Order.java
 D:\IdeaProjects\thomasshopping\src\main\java\com\fudan\thomasshopping\service\productServiceImpl.java
 D:\IdeaProjects\thomasshopping\src\main\java\com\fudan\thomasshopping\service\shopServiceImpl.java
 D:\IdeaProjects\thomasshopping\src\main\java\com\fudan\thomasshopping\service\userServiceImpl.java
+D:\IdeaProjects\thomasshopping\src\main\java\com\fudan\thomasshopping\controller\logisticController.java
 D:\IdeaProjects\thomasshopping\src\main\java\com\fudan\thomasshopping\dao\userRepository.java
 D:\IdeaProjects\thomasshopping\src\main\java\com\fudan\thomasshopping\controller\orderController.java
 D:\IdeaProjects\thomasshopping\src\main\java\com\fudan\thomasshopping\dao\orderRepository.java
