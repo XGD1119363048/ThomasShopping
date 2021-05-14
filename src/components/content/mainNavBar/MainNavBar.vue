@@ -38,9 +38,9 @@
       <nav-bar-item path="/register">
         <a slot="item-text">Register</a>
       </nav-bar-item>
-      <nav-bar-item>
-        <a slot="item-text">Message</a>
-      </nav-bar-item>
+<!--      <nav-bar-item>-->
+<!--        <a slot="item-text">Message</a>-->
+<!--      </nav-bar-item>-->
     </div>
     <div v-else slot="topbar-info">
       <nav-bar-item path="/info">
@@ -57,7 +57,7 @@
     </div>
     <div slot="header-logo">
       <nav-bar-item2>
-        <img slot="item-icon" src="~assets/img/navbar/Cart_Active.svg">
+        <img slot="item-icon" src="~assets/img/logo/logo.jpg">
       </nav-bar-item2>
     </div>
     <div slot="header-search">
