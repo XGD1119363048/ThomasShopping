@@ -22,6 +22,9 @@ module.exports = {
       }
     }
   },
+  publicPath: './',
+  outputDir: 'dist',
+  assetsDir: 'static',
   devServer: {
     proxy: {
       '/api': {
@@ -33,8 +36,5 @@ module.exports = {
         }
       }
     }
-  },
-  assetsDir: 'static',
-  parallel: false,
-  publicPath: './'
+  }
 }
