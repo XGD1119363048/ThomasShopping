@@ -8,6 +8,7 @@ const Home = () => import('../views/home/Home')
 const Login = () => import('../views/login/Login')
 const Register = () => import('../views/register/Register')
 const Good = () => import('../views/good/Good')
+const Info = () => import('../views/info/Info')
 
 const originalPush = VueRouter.prototype.push
 VueRouter.prototype.push = function push(location) {
@@ -46,6 +47,10 @@ const routes = [
     meta: {
       requireAuth: true
     }
+  },
+  {
+    path: '/info',
+    component: Info
   }
 ]
 
@@ -62,6 +67,7 @@ router.beforeEach(((to, from, next) => {
     userId: window.sessionStorage.getItem('userId'),
     isLogin: window.sessionStorage.getItem('isLogin')
   }
+  // console.log(payload);
   store.commit(SETLOGIN, payload)
   if(to.meta.requireAuth && !window.sessionStorage.getItem('isLogin')) {
     // console.log('test')

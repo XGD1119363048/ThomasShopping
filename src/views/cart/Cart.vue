@@ -7,7 +7,7 @@
                @delete-click="deleteClick"
     />
     <div v-if="status == 0 && cartGoods.length > 0" class="total-price" style="font-size: 20px">
-      <p>总价：￥{{showTotalPrice}}</p>
+      <p>总价：￥{{showTotalPrice.toFixed(2)}}</p>
       <a-button type="primary" style="margin-left: 30px; margin-top: 0" @click="payOrder">Pay</a-button>
     </div>
   </div>

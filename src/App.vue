@@ -20,5 +20,6 @@
 body {
   margin-top: 0;
   margin-left: 0;
+  background: #f5f5f5;
 }
 </style>

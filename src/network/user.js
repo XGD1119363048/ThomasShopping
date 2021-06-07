@@ -1,7 +1,7 @@
 import { request } from "./request";
 
 
-export function addUser(userName, password, address, phoneNumber, gender, age, birthday, email, status, coin) {
+export function addUser(userName, password, address, phoneNumber, gender, age, birthday, email, status, coin, balance) {
   return request({
     url: '/addUser',
     method: 'post',
@@ -15,7 +15,8 @@ export function addUser(userName, password, address, phoneNumber, gender, age, b
       birthday: birthday,
       email: email,
       status: status,
-      coin: coin
+      coin: coin,
+      balance: balance
     }
   })
 }

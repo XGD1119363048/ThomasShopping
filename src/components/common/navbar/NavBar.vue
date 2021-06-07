@@ -76,6 +76,7 @@
   .site-header {
     z-index: 20;
     height: 100px;
+    background: white;
   }
 
   .site-header .container {
