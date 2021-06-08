@@ -12,6 +12,7 @@ public interface orderService {
     Order updateOrder(Order order);
     Order getOrderById(Long id);
     Order getUnpaidOrder(User user);
+    Order payOrder(Order order,Integer useCoin);
     List<Product> getProductsByOrder(Long orderId);
     List<Order> getOrdersByShop(String shopName);
     List<Order> getOrderByUser(String userName);

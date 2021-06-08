@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.DecimalFormat;
 import java.util.*;
 
 @RestController
@@ -34,6 +35,8 @@ public class orderController {
 
     @Autowired
     private dataService dataService;
+
+    DecimalFormat df = new DecimalFormat("0.00");
 
     @PostMapping("/addOrder")
     private JSONObject addOrder(@RequestBody JSONObject jsonObject){
@@ -69,6 +72,7 @@ public class orderController {
             order.setUser(user);
             order.setShops(shops);
             order.setProducts(products);
+            cost = Double.parseDouble(df.format(cost));
             order.setCost(cost);
             order = orderService.addOrder(order);
             if(order!=null){
@@ -285,30 +289,8 @@ public class orderController {
         Integer useCoin = jsonObject.getInteger("useCoin");
         Order order = orderService.getOrderById(orderId);
         if(order!=null){
-            order.setCreated_time(new Date());
-            order.setStatus(1);
-            order.setType("已支付订单");
-            user = order.getUser();
-            double balance = user.getBalance();
-            order.setPay(order.getCost()-useCoin/1000.0);
-            if(balance<order.getPay()){
-                res.put("error","支付订单失败，余额不足");
-                res.put("order",null);
-                return res;
-            }
-            order = orderService.updateOrder(order);
+            order = orderService.payOrder(order,useCoin);
             if(order!=null) {
-                int coin = user.getCoin() - useCoin +order.getPay().intValue();
-                user.setCoin(coin);
-                user.setBalance(user.getBalance()-order.getPay());
-                userService.updateUser(user);
-                List<Product> products = order.getProducts();
-                List<Integer> quantity = order.getQuantity();
-                for (int i = 0; i < products.size(); i++) {
-                    Product product = products.get(i);
-                    product.setStock(product.getStock() - quantity.get(i));
-                    productService.updateProduct(product);
-                }
                 dataService.simplifyOrder(order);
                 res.put("order",JSONObject.parseObject(JSON.toJSONString(order)));
                 res.put("error","");

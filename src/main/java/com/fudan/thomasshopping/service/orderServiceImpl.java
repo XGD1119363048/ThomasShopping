@@ -11,7 +11,9 @@ import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 @Service
 public class orderServiceImpl implements orderService{
@@ -22,7 +24,12 @@ public class orderServiceImpl implements orderService{
     private shopService shopService;
 
     @Autowired
+    private productService productService;
+
+    @Autowired
     private userService userService;
+
+    DecimalFormat df = new DecimalFormat("0.00");
 
     @Override
     public Order addOrder(Order order) {
@@ -62,6 +69,36 @@ public class orderServiceImpl implements orderService{
         order.setQuantity(new ArrayList<>());
         order.setProducts(new ArrayList<>());
         order = orderRepository.save(order);
+        return order;
+    }
+
+    @Override
+    public Order payOrder(Order order,Integer useCoin) {
+        useCoin-=useCoin%10;
+        order.setCreated_time(new Date());
+        order.setStatus(1);
+        order.setType("已支付订单");
+        User user = order.getUser();
+        double balance = user.getBalance();
+        double pay = order.getCost()-useCoin/1000.0;
+        pay = Double.parseDouble(df.format(pay));
+        order.setPay(pay);
+        if(balance<order.getPay())
+            return null;
+        order = updateOrder(order);
+        if(order!=null) {
+            int coin = user.getCoin() - useCoin + order.getPay().intValue();
+            user.setCoin(coin);
+            user.setBalance(user.getBalance() - order.getPay());
+            userService.updateUser(user);
+            List<Product> products = order.getProducts();
+            List<Integer> quantity = order.getQuantity();
+            for (int i = 0; i < products.size(); i++) {
+                Product product = products.get(i);
+                product.setStock(product.getStock() - quantity.get(i));
+                productService.updateProduct(product);
+            }
+        }
         return order;
     }
 

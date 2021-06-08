@@ -43,7 +43,7 @@ public class dataServiceImpl implements dataService{
     public Order simplifyOrder(Order order) {
         order.setLogistic(null);
         User user = order.getUser();
-        user.setCoin(null);
+//        user.setCoin(null);
         user.setGender(null);
         user.setPassword(null);
         user.setBirthday(null);

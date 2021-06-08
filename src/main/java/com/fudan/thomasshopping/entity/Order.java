@@ -1,6 +1,7 @@
 package com.fudan.thomasshopping.entity;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.sun.javafx.geom.transform.Identity;
 import lombok.Data;
 

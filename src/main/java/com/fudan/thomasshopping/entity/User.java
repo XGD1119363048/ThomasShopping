@@ -1,7 +1,9 @@
 package com.fudan.thomasshopping.entity;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.sun.istack.NotNull;
+import com.sun.istack.Nullable;
 import lombok.Data;
 import lombok.NonNull;
 

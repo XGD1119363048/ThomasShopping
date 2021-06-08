@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -22,6 +23,8 @@ public class userController {
 
     @Autowired
     private dataService dataService;
+
+    DecimalFormat df = new DecimalFormat("0.00");
 
     @PostMapping("/addUser")
     private JSONObject addUser(@RequestBody JSONObject jsonObject) {
@@ -103,7 +106,9 @@ public class userController {
         Long balance = jsonObject.getLong("balance");
         User user = userService.getUser(userName);
         if(user!=null){
-            user.setBalance(user.getBalance()+balance);
+            Double balance2 = balance+user.getBalance();
+            balance2 = Double.parseDouble(df.format(balance2));
+            user.setBalance(balance2);
             if(userService.updateUser(user)!=null){
                 res.put("error","");
                 return res;
