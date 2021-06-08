@@ -7,7 +7,7 @@ export function request(config) {
   })
 
   instance.interceptors.request.use(config => {
-    console.log(config.data);
+    // console.log(config.data);
     return config
   }, err => {
     console.log(err);

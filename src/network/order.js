@@ -83,7 +83,8 @@ export function payOrder(useCoin, userName) {
 export function cancelOrder(orderId) {
     return request({
         url: '/cancelOrder',
-        params: {
+        method: 'post',
+        data: {
             orderId: orderId
         }
     })

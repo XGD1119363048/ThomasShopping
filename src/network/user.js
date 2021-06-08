@@ -60,6 +60,17 @@ export function checkUser(username, password) {
   })
 }
 
+export function addBalance(username, balance) {
+  return request({
+    url: '/addBalance',
+    method: 'post',
+    data: {
+      userName: username,
+      balance: balance
+    }
+  })
+}
+
 
 
 

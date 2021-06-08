@@ -7,7 +7,17 @@
                @delete-click="deleteClick"
     />
     <div v-if="status == 0 && cartGoods.length > 0" class="total-price" style="font-size: 20px">
-      <p>总价：￥{{showTotalPrice.toFixed(2)}}</p>
+      <div>
+        <p style="display: inline">总价：</p>
+        <div style="display: inline" v-if="userCoins >= 10">
+          <del style="display: inline; color: grey">￥{{showTotalPrice.toFixed(2)}}</del>
+          <p style="display: inline">￥{{(showTotalPrice - (userCoins - (userCoins % 10)) / 1000).toFixed(2)}}</p>
+          <p style="display: inline; font-size: 10px">(使用积分: {{(userCoins - (userCoins % 10))}})</p>
+        </div>
+        <div style="display: inline" v-else>
+          <p style="display: inline;">￥{{showTotalPrice.toFixed(2)}}</p>
+        </div>
+      </div>
       <a-button type="primary" style="margin-left: 30px; margin-top: 0" @click="payOrder">Pay</a-button>
     </div>
   </div>
@@ -28,7 +38,8 @@
       return {
         cartGoods: [],
         totalPrice: 0,
-        status: 0
+        status: 0,
+        userCoins: 0
       }
     },
     computed: {
@@ -85,11 +96,13 @@
               stock: order.products[i].stock
             })
           }
+          this.userCoins = order.user.coin
+          console.log(this.userCoins);
         })
       },
       payOrder() {
         // console.log(this.$store.state.userId)
-        payOrder(0, this.$store.state.userId).then(res => {
+        payOrder(this.userCoins, this.$store.state.userId).then(res => {
           if(res.error == '') {
             alert('Pay successfully!')
             this.status = 1

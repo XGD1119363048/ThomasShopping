@@ -27,7 +27,22 @@
                 <a-col :span="12" style="text-align: left">
                   <p>Address:{{userInfo.address}}</p>
                   <p>Age:{{userInfo.age}}</p>
-                  <p>Balance:{{userInfo.balance}}</p>
+                  <p style="display: inline">Balance:{{remainBalance}}</p>
+                  <div style="display: inline; margin-left: 10px">
+                    <a-button @click="showModal">
+                      charge
+                    </a-button>
+                    <a-modal
+                        title="Input"
+                        :visible="visible"
+                        :confirm-loading="confirmLoading"
+                        @ok="handleOk"
+                        @cancel="handleCancel"
+                    >
+<!--                      <p>{{ ModalText }}</p>-->
+                      <a-input prefix="￥" suffix="RMB" v-model="balance" />
+                    </a-modal>
+                  </div>
                   <p>Birthday:{{userInfo.birthday}}</p>
                   <p>Coin:{{userInfo.coin}}</p>
                   <p>Email:{{userInfo.email}}</p>
@@ -50,12 +65,9 @@
                 <a-col :span="4">
                   <a @click="changeOrderIndex(3)" :class="{active: orderNowIndex === 3}">已取消</a>
                 </a-col>
-                <a-col :span="4">
-                  <a @click="changeOrderIndex(4)" :class="{active: orderNowIndex === 4}">购物车</a>
-                </a-col>
               </a-row>
               <a-row>
-                <order-list :orders="userOrders"/>
+                <order-list :orders="getTypeOrders(orderNowIndex)"/>
               </a-row>
             </div>
           </div>
@@ -67,11 +79,10 @@
 </template>
 
 <script>
-  import { Layout, Row, Col, Icon } from 'ant-design-vue'
-  import { queryUser } from "@/network/user"
+  import { Layout, Row, Col, Icon, Button, Modal, Input } from 'ant-design-vue'
+  import { queryUser, addBalance } from "network/user"
   import { getOrderByUser } from "@/network/order"
   import OrderList from "views/info/infoChild/OrderList";
-
   export default {
     name: "Info",
     components: {
@@ -84,17 +95,37 @@
       'a-layout-sider': Layout.Sider,
       'a-row': Row,
       'a-col': Col,
-      'a-icon': Icon
+      'a-icon': Icon,
+      'a-button': Button,
+      'a-modal': Modal,
+      'a-input': Input
     },
     data() {
       return {
         userInfo: {},
         userOrders: [],
-        // paidOrders: [],
-        // canceledOrders: [],
-        // cartList: [],
+        paidOrders: [],
+        canceledOrders: [],
+        cartList: [],
         nowIndex: 1,
-        orderNowIndex: 1
+        orderNowIndex: 1,
+
+        ModalText: 'Content of the modal',
+        visible: false,
+        confirmLoading: false,
+
+        balance: 100
+      }
+    },
+    computed: {
+      remainBalance() {
+        // console.log(this.userInfo.balance);
+        // if(this.userInfo.balance == undefined) {
+        //   return this.userInfo.balance
+        // } else {
+        //   return this.userInfo.balance.toFixed(2)
+        // }
+        return this.userInfo.balance
       }
     },
     methods: {
@@ -103,22 +134,72 @@
       },
       changeOrderIndex(index) {
         this.orderNowIndex = index
+        // console.log(this.userOrders)
+        // console.log(this.orderNowIndex);
+        // console.log(this.getTypeOrders(this.orderNowIndex));
+      },
+      getTypeOrders(orderNowIndex) {
+        switch (orderNowIndex) {
+          case 1:
+            return this.userOrders
+          case 2:
+            return this.paidOrders
+          case 3:
+            return this.canceledOrders
+        }
       },
       queryUser(username) {
         queryUser(username).then(res => {
           if(res.error == '') {
             // console.log(res.user);
             this.userInfo = res.user
+            // console.log(this.userInfo);
           }
         })
       },
       getOrderByUser(username) {
         getOrderByUser(username).then(res => {
           if(res.error == '') {
-            console.log(res.orders);
+            // console.log(res.orders);
             this.userOrders = res.orders
+            this.userOrders.pop()
+            for(let i = 0; i < this.userOrders.length; i++) {
+              if(this.userOrders[i].status == 1) {
+                this.paidOrders.push(this.userOrders[i])
+              } else if(this.userOrders[i].status == 2) {
+                this.canceledOrders.push(this.userOrders[i])
+              } else {}
+            }
+            // console.log(this.userOrders);
+            // console.log(this.paidOrders);
+            // console.log(this.canceledOrders);
           }
         })
+      },
+      addBalance(username, balance) {
+        addBalance(username, balance).then(res => {
+          if(res.error == '') {
+            console.log(this.userInfo.balance);
+            this.userInfo.balance += parseInt(balance)
+            console.log(this.userInfo.balance);
+          }
+        })
+      },
+      showModal() {
+        this.visible = true;
+      },
+      handleOk(e) {
+        this.ModalText = 'The modal will be closed after two seconds';
+        this.confirmLoading = true;
+        this.addBalance(this.$store.state.userId, this.balance)
+        setTimeout(() => {
+          this.visible = false;
+          this.confirmLoading = false;
+        }, 2000);
+      },
+      handleCancel(e) {
+        console.log('Clicked cancel button');
+        this.visible = false;
       }
     },
     mounted() {
