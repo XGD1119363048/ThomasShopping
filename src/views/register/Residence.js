@@ -1,14 +1,14 @@
 export const residences = [
   {
-    value: 'Beijing',
+    value: 'beijing',
     label: 'Beijing',
   },
   {
-    value: 'Shanghai',
+    value: 'shanghai',
     label: 'Shanghai',
   },
   {
-    value: 'Heilongjiang',
+    value: 'heilongjiang',
     label: 'Heilongjiang',
   },
   {
@@ -32,15 +32,15 @@ export const residences = [
     ]
   },
   {
-    value: 'Guangdong',
+    value: 'guangdong',
     label: 'Guangdong',
   },
   {
-    value: 'Hubei',
+    value: 'hubei',
     label: 'Hubei',
   },
   {
-    value: 'Hunan',
+    value: 'hunan',
     label: 'Hunan',
   }
 ]

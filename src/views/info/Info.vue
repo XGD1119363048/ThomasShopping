@@ -11,6 +11,9 @@
               <br/>
               <br/>
               <a @click="changeIndex(2)" :class="{active: nowIndex === 2}">我的订单</a>
+              <br/>
+              <br/>
+              <a @click="changeIndex(3)" :class="{active: nowIndex === 3}" v-if="userInfo.status === 2">上传商品</a>
             </div>
           </div>
         </a-layout-sider>
@@ -70,6 +73,60 @@
                 <order-list :orders="getTypeOrders(orderNowIndex)"/>
               </a-row>
             </div>
+            <div v-else-if="nowIndex == 3">
+              <div style="text-align: center; line-height: 50px">Upload</div>
+              <a-form :form="form" :label-col="{ span: 5 }" :wrapper-col="{ span: 12 }" @submit="handleSubmit">
+                <a-form-item label="Shop Name">
+                  <a-input
+                      v-decorator="['shopname', { rules: [{ required: true, message: 'Please input your shop name!' }] }]"
+                  />
+                </a-form-item>
+                <a-form-item label="Product Name">
+                  <a-input
+                      v-decorator="['name', { rules: [{ required: true, message: 'Please input your product name!' }] }]"
+                  />
+                </a-form-item>
+                <a-form-item label="Description">
+                  <a-input
+                      v-decorator="['description', { rules: [{ required: true, message: 'Please input your product description!' }] }]"
+                  />
+                </a-form-item>
+                <a-form-item label="Price">
+                  <a-input
+                      v-decorator="['price', { rules: [{ required: true, message: 'Please input your product price!' }] }]"
+                  />
+                </a-form-item>
+                <a-form-item label="Stock">
+                  <a-input
+                      v-decorator="['stock', { rules: [{ required: true, message: 'Please input your product stock!' }] }]"
+                  />
+                </a-form-item>
+                <a-form-item label="Category">
+                  <a-cascader
+                      v-decorator="[
+                        'category',
+                        {
+                          initialValue: ['1', '1'],
+                          rules: [
+                              { type: 'array', required: true, message: 'Please select your habitual residence!' },
+                          ],
+                        },
+                      ]"
+                      :options="category"
+                  />
+                </a-form-item>
+                <a-form-item label="Image Address">
+                  <a-input
+                      v-decorator="['imageaddress', { rules: [{ required: true, message: 'Please input your product image address!' }] }]"
+                  />
+                </a-form-item>
+                <a-form-item :wrapper-col="{ span: 12, offset: 5 }">
+                  <a-button type="primary" html-type="submit">
+                    Submit
+                  </a-button>
+                </a-form-item>
+              </a-form>
+            </div>
           </div>
         </a-layout-content>
       </a-layout>
@@ -79,10 +136,13 @@
 </template>
 
 <script>
-  import { Layout, Row, Col, Icon, Button, Modal, Input } from 'ant-design-vue'
+  import { Layout, Row, Col, Icon, Button, Modal, Input, Form, Cascader } from 'ant-design-vue'
   import { queryUser, addBalance } from "network/user"
   import { getOrderByUser } from "@/network/order"
   import OrderList from "views/info/infoChild/OrderList";
+  import { category } from "views/info/js/Category";
+  import { addProduct } from "network/good";
+
   export default {
     name: "Info",
     components: {
@@ -98,7 +158,10 @@
       'a-icon': Icon,
       'a-button': Button,
       'a-modal': Modal,
-      'a-input': Input
+      'a-input': Input,
+      'a-form': Form,
+      'a-form-item': Form.Item,
+      'a-cascader': Cascader
     },
     data() {
       return {
@@ -114,7 +177,12 @@
         visible: false,
         confirmLoading: false,
 
-        balance: 100
+        balance: 100,
+
+        formLayout: 'horizontal',
+        form: this.$form.createForm(this, { name: 'coordinated' }),
+
+        category,
       }
     },
     computed: {
@@ -153,7 +221,7 @@
           if(res.error == '') {
             // console.log(res.user);
             this.userInfo = res.user
-            // console.log(this.userInfo);
+            console.log(this.userInfo);
           }
         })
       },
@@ -200,6 +268,26 @@
       handleCancel(e) {
         console.log('Clicked cancel button');
         this.visible = false;
+      },
+      handleSubmit(e) {
+        e.preventDefault();
+        this.form.validateFields((err, values) => {
+          if (!err) {
+            console.log('Received values of form: ', values);
+            addProduct(values.shopname,
+                values.name,
+                values.description,
+                values.price, values.stock,
+                values.category[0],
+                values.category[1],
+                values.imageaddress).then(res => {
+                  if(res.error == '') {
+                    alert('Add product successfully!')
+                    this.$router.replace('/home')
+                  }
+            })
+          }
+        });
       }
     },
     mounted() {

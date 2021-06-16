@@ -78,7 +78,7 @@
     },
     watch: {
       orders: function (newOrders) {
-        console.log(newOrders);
+        // console.log(newOrders);
         this.pushData()
       }
     },
@@ -116,7 +116,7 @@
     },
     mounted() {
       this.pushData()
-      console.log(this.data);
+      // console.log(this.data);
     }
   }
 </script>

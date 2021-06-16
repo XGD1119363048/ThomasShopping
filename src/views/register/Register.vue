@@ -262,7 +262,7 @@ export default {
               age,
               values.birthday.format('MM-DD'),
               values.email == undefined ? null : values.email,
-              1,
+              values.status == 'user' ? 1 : 2,
               0,
               0
           ).then(res => {
